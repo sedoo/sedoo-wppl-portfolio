@@ -113,9 +113,13 @@ function sedoo_portfolio_filter_display_cpt() {
 	$term = $_POST['term'];
 	$taxo = $_POST['taxo'];
 	$layout = $_POST['layout'];
+	$order = $_POST['order'];
+	$orderby = $_POST['orderby'];
 
 	$items = new WP_Query(array(
 		'post_type' => $cpt,
+		'order' => $order,
+		'orderby' => $orderby,
 		'numberposts' => -1,
 		'post_status' => 'publish',
 		'tax_query' => array(
@@ -156,9 +160,13 @@ function sedoo_portfolio_filter_display_ctx() {
 	$term = $_POST['term'];
 	$taxo = $_POST['taxo'];
 	$layout = $_POST['layout'];
+	$order = $_POST['order'];
+	$orderby = $_POST['orderby'];
 
 	$items = new WP_Query(array(
 		'post_type' => $cpt,
+		'order' => $order,
+		'orderby' => $orderby,
 		'numberposts' => -1,
 		'post_status' => 'publish',
 		'tax_query' => array(
