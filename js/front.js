@@ -10,11 +10,13 @@ jQuery(document).ready(function(){
         term = jQuery(this).attr('term');
         taxo = jQuery(this).attr('taxo');
         layout = jQuery(this).attr('layout');
+        order = jQuery(this).attr('order');
+        orderby = jQuery(this).attr('orderby');
         jQuery.ajax({   // AJAX GOES IN sedoo-wppl-portfolio-functions.php
             url: ajaxurl,
             method: "POST",
             dataType:"json",
-            data: { action : 'sedoo_portfolio_filter_display_cpt','layout':layout, 'taxo': taxo, 'cpt': cpt, 'term': term },
+            data: { action : 'sedoo_portfolio_filter_display_cpt','order': order, 'orderby': orderby, 'layout':layout, 'taxo': taxo, 'cpt': cpt, 'term': term },
             complete:function(result_term_list) {
                 if(result_term_list.responseText != '') {
                     jQuery('.sedoo_portfolio_section.section_cpt').html(result_term_list.responseText);
@@ -35,11 +37,13 @@ jQuery(document).ready(function(){
         term = jQuery(this).attr('term');
         taxo = jQuery(this).attr('ctx');
         layout = jQuery(this).attr('layout');
+        order = jQuery(this).attr('order');
+        orderby = jQuery(this).attr('orderby');
         jQuery.ajax({   // AJAX GOES IN sedoo-wppl-portfolio-functions.php
             url: ajaxurl,
             method: "POST",
             dataType:"json",
-            data: { action : 'sedoo_portfolio_filter_display_ctx','layout':layout, 'taxo': taxo, 'cpt': cpt, 'term': term },
+            data: { action : 'sedoo_portfolio_filter_display_ctx','order': order, 'orderby': orderby, 'layout':layout, 'taxo': taxo, 'cpt': cpt, 'term': term },
             complete:function(result_term_list) {
                 if(result_term_list.responseText != '') {
                     jQuery('.sedoo_portfolio_section.section_ctx').html(result_term_list.responseText);

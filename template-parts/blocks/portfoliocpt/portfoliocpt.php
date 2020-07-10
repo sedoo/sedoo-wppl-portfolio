@@ -12,8 +12,13 @@ if($titre) {
 
 $layout = get_field('affichage');
 $typedefiltre = get_field('type_de_filtre');
+
+
+
 $tri = get_field('tri');
 $ordre = get_field('ordre');
+
+
 ///////////////
 // IF DISPLAY BY CPT
 ///////
