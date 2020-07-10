@@ -12,7 +12,8 @@ if($titre) {
 
 $layout = get_field('affichage');
 $typedefiltre = get_field('type_de_filtre');
-
+$tri = get_field('tri');
+$ordre = get_field('ordre');
 ///////////////
 // IF DISPLAY BY CPT
 ///////
@@ -30,13 +31,13 @@ if($typedefiltre == 'cpt') {
     //
     echo '<ul class="sedoo_port_action_btn cpt_button">';
     foreach($terms as $term) {
-        echo '<li cpt="'.$cpt.'" taxo="'.$taxo.'" term="'.$term->slug.'" layout="'.$layout.'">'.$term->name.'</li>';
+        echo '<li cpt="'.$cpt.'" order="'.$ordre.'" orderby="'.$tri.'" taxo="'.$taxo.'" term="'.$term->slug.'" layout="'.$layout.'">'.$term->name.'</li>';
     }
     echo '</ul>';
 
     echo '<section class="sedoo_portfolio_section section_cpt">';
 
-    $items = new WP_Query(array('post_type' => $cpt));
+    $items = new WP_Query(array('post_type' => $cpt, 'orderby' => $tri, 'order' => $ordre));
     if ( $items->have_posts() ) {
         while ( $items->have_posts() ) {
             $items->the_post();
@@ -71,6 +72,8 @@ else {
                 'terms' => $terme,
             ),
         ),
+        'orderby' => $tri, 
+        'order' => $ordre,
     );
 
     $cpt_array = [];
@@ -82,7 +85,7 @@ else {
         if (!in_array(get_post_type(), $cpt_array)) { 
             $cpt_array[]  = get_post_type();    
             $cpt_name = get_post_type_object( get_post_type() )->labels->name;
-            $boutons .= '<li cpt="'.get_post_type().'" ctx="'.$ctx.'" term="'.$terme.'" layout="'.$layout.'">'.$cpt_name.'</li>';
+            $boutons .= '<li cpt="'.get_post_type().'" order="'.$ordre.'" orderby="'.$tri.'" ctx="'.$ctx.'" term="'.$terme.'" layout="'.$layout.'">'.$cpt_name.'</li>';
         }
         ob_start();
         switch ($layout) {
