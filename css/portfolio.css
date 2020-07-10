@@ -10,12 +10,12 @@
 
 .sedoo_port_action_btn {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
 }
 .sedoo_port_action_btn li {
     list-style-type: none;
     border: 1px solid #e6e6e6;
-    margin: 0 !important;
+    margin: 0 10px !important;
     cursor: pointer;
     padding: 5px 15px;
     border-radius: 5px;
