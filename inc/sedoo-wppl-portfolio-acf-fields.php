@@ -204,7 +204,6 @@ if( function_exists('acf_add_local_field_group') ):
                     'date' => 'Date',
                 ),
                 'default_value' => array(
-                    'title' => 'Alphabétique',
                 ),
                 'allow_null' => 0,
                 'multiple' => 0,
@@ -231,7 +230,6 @@ if( function_exists('acf_add_local_field_group') ):
                     'DESC' => 'Descendant',
                 ),
                 'default_value' => array(
-                    'ASC' => 'Ascendant',
                 ),
                 'allow_null' => 0,
                 'multiple' => 0,
