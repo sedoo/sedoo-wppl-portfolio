@@ -1,0 +1,40 @@
+.sedoo_portfolio_section {
+    display: flex;
+}
+
+.sedoo_portfolio_section .sedoo_portfolio_item{
+    flex-grow:1;
+    flex-basis:300px;
+    padding: 15px;
+}
+
+.sedoo_port_action_btn {
+    display: flex;
+    justify-content: space-evenly;
+}
+.sedoo_port_action_btn li {
+    list-style-type: none;
+    border: 1px solid #e6e6e6;
+    margin: 0 !important;
+    cursor: pointer;
+    padding: 5px 15px;
+    border-radius: 5px;
+    -webkit-transition: background .2s ease-in;
+    -moz-transition: background .2s ease-in;
+    -ms-transition: background .2s ease-in;
+    -o-transition: background .2s ease-in;
+    transition: background .2s ease-in;
+}
+
+.sedoo_port_action_btn li:hover {
+    background-color: #e6e6e6;
+    -webkit-transition: background .2s ease-in;
+    -moz-transition: background .2s ease-in;
+    -ms-transition: background .2s ease-in;
+    -o-transition: background .2s ease-in;
+    transition: background .2s ease-in;
+}
+
+.sedoo_port_action_btn li.active {
+    background-color: #e6e6e6;
+}
