@@ -4,7 +4,7 @@
 <?php
 
 $titre = get_field('titre_du_bloc');
-
+$themedir = WP_CONTENT_DIR.'/themes/'.wp_get_theme()->get('TextDomain');
 if($titre) {
     echo '<h2>'.$titre.'</h2>';
 }
@@ -51,11 +51,11 @@ if($typedefiltre == 'cpt') {
                     include('grid.php');
                     break;
                 case 'grid-no-image':
-                    include('grid.php');
+                    include('gridnoimage.php');
                     break;
                 case 'list':
                     include('list.php');
-                    break;
+                break;
                 default:
                     break;
             }
@@ -98,11 +98,11 @@ else {
                 include('grid.php');
                 break;
             case 'grid-no-image':
-                include('grid.php');
+                include('gridnoimage.php');
                 break;
             case 'list':
                 include('list.php');
-                break;
+            break;
             default:
                 break;
         }
