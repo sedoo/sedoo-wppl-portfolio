@@ -106,7 +106,6 @@ add_action('wp_ajax_sedoo_portfolio_populate_taxo_depend_on_post_type', 'sedoo_p
 */
 
 
-
 /***  * FRONT END FILTER (DISPLAY BY CPT)  / AJAX CALL FROM FRONT.JS LINE 12 ***/
 function sedoo_portfolio_filter_display_cpt() {
 	$cpt = $_POST['cpt'];
@@ -139,7 +138,7 @@ function sedoo_portfolio_filter_display_cpt() {
 						include('template-parts/blocks/portfoliocpt/grid.php');
 						break;
 					case 'grid-no-image':
-						include('template-parts/blocks/portfoliocpt/grid.php');
+						include('template-parts/blocks/portfoliocpt/gridnoimage.php');
 						break;
 					case 'list':
 						include('template-parts/blocks/portfoliocpt/list.php');
@@ -186,7 +185,7 @@ function sedoo_portfolio_filter_display_ctx() {
 						include('template-parts/blocks/portfoliocpt/grid.php');
 						break;
 					case 'grid-no-image':
-						include('template-parts/blocks/portfoliocpt/grid.php');
+						include('template-parts/blocks/portfoliocpt/gridnoimage.php');
 						break;
 					case 'list':
 						include('template-parts/blocks/portfoliocpt/list.php');

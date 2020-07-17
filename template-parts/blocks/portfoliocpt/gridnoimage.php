@@ -4,30 +4,21 @@
 <div class="sedoo_portfolio_item">
     <article id="post-<?php the_ID(); ?>" <?php post_class('post '.$classParameter.''); ?>>
         <a href="<?php the_permalink(); ?>" title="<?php echo __('Read more', 'sedoo-wpth-labs'); ?>"></a>
-            <header class="entry-header">
-                <?php if($layout == 'grid') { ?>
-                <figure>
-                    <?php 
-                    if (has_post_thumbnail()) {
-                        the_post_thumbnail('thumbnail-loop');
-                    } else {
-                        labs_by_sedoo_catch_that_image();                
-                    }?>            
-                </figure>
-                <?php } ?>
                 <?php     
                 $categories = get_the_category();
                 if ( ! empty( $categories ) ) {
-                ?> 
+                ?>             
+                <header class="entry-header">
+
                 <p>
                     <?php 
                     echo esc_html( $categories[0]->name );   
                     ?>
+                    </header><!-- .entry-header -->
                 </p>
                 <?php
                 }; 
                 ?>
-            </header><!-- .entry-header -->
             <div class="group-content">
                 <div class="entry-content">
                     <h3><?php the_title(); ?></h3>
