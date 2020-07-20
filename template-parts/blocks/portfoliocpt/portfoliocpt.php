@@ -3,28 +3,51 @@
 </script>
 <?php
 
-$titre = get_field('titre_du_bloc');
-$themedir = WP_CONTENT_DIR.'/themes/'.wp_get_theme()->get('TextDomain');
-if($titre) {
-    echo '<h2>'.$titre.'</h2>';
-}
-
-
-$layout = get_field('affichage');
 $typedefiltre = get_field('type_de_filtre');
-
-
-
+$layout = get_field('affichage');
 $tri = get_field('tri');
 $ordre = get_field('ordre');
 
+$code_color = get_theme_mod( 'labs_by_sedoo_color_code' );
+?>
+<style>
+    .sedoo_port_action_btn li:hover {
+        background-color: <?php echo $code_color; ?> !important;
+    }
+
+    .sedoo_port_action_btn li.active {
+        background-color: <?php echo $code_color; ?> !important;
+    }
+</style>
+<?php 
+
+///////////////////
+// Function to display items depend on the $layout
+///////////
+if ( ! function_exists('sedoo_portfolio_display_items') ) { // because of issue when editing in backoffice
+    function sedoo_portfolio_display_items($layout) {
+        switch ($layout) {
+            case 'grid':
+                include('grid.php');
+                break;
+            case 'grid-no-image':
+                include('gridnoimage.php');
+                break;
+            case 'list':
+                include('list.php');
+            break;
+            default:
+                break;
+        }
+    }
+}
 
 ///////////////
 // IF DISPLAY BY CPT
 ///////
 if($typedefiltre == 'cpt') {
     $cpt = get_field('choix_du_post_type');
-    $taxo = get_field('field_5f05b5841a7fa'); // issue with field name idk why
+    $taxo = get_field('field_5f05b5841a7fa'); // issue with field name idk why but getting taxonomy selected by users
     $terms = get_terms( array(
         'taxonomy' => $taxo,
         'hide_empty' => false,
@@ -35,34 +58,24 @@ if($typedefiltre == 'cpt') {
     // DISPLAY BUTTON LIST (ONE BY TERM)
     //
     echo '<ul class="sedoo_port_action_btn cpt_button">';
-    foreach($terms as $term) {
-        echo '<li cpt="'.$cpt.'" order="'.$ordre.'" orderby="'.$tri.'" taxo="'.$taxo.'" term="'.$term->slug.'" layout="'.$layout.'">'.$term->name.'</li>';
-    }
+        foreach($terms as $term) {
+            echo '<li cpt="'.$cpt.'" order="'.$ordre.'" orderby="'.$tri.'" taxo="'.$taxo.'" term="'.$term->slug.'" layout="'.$layout.'"><p>'.$term->name.'</p></li>';
+        }
     echo '</ul>';
 
     echo '<section class="sedoo_portfolio_section section_cpt">';
-
-    $items = new WP_Query(array('post_type' => $cpt, 'orderby' => $tri, 'order' => $ordre));
-    if ( $items->have_posts() ) {
-        while ( $items->have_posts() ) {
-            $items->the_post();
-            switch ($layout) {
-                case 'grid':
-                    include('grid.php');
-                    break;
-                case 'grid-no-image':
-                    include('gridnoimage.php');
-                    break;
-                case 'list':
-                    include('list.php');
-                break;
-                default:
-                    break;
+        $items = new WP_Query(array('post_type' => $cpt, 'orderby' => $tri, 'order' => $ordre));
+        if ( $items->have_posts() ) {
+            while ( $items->have_posts() ) {
+                $items->the_post();
+                sedoo_portfolio_display_items($layout);
             }
         }
-    }
     echo '</section>';
 } 
+
+
+
 ///////////////
 // IF DISPLAY BY CTX
 ///////
@@ -83,38 +96,25 @@ else {
 
     $cpt_array = [];
     $content_array;
-    $boutons = '<ul class="sedoo_port_action_btn ctx_button">';
     $loop = new WP_Query($args);
     if($loop->have_posts()) {
-    while($loop->have_posts()) : $loop->the_post();
-        if (!in_array(get_post_type(), $cpt_array)) { 
-            $cpt_array[]  = get_post_type();    
-            $cpt_name = get_post_type_object( get_post_type() )->labels->name;
-            $boutons .= '<li cpt="'.get_post_type().'" order="'.$ordre.'" orderby="'.$tri.'" ctx="'.$ctx.'" term="'.$terme.'" layout="'.$layout.'">'.$cpt_name.'</li>';
-        }
-        ob_start();
-        switch ($layout) {
-            case 'grid':
-                include('grid.php');
-                break;
-            case 'grid-no-image':
-                include('gridnoimage.php');
-                break;
-            case 'list':
-                include('list.php');
-            break;
-            default:
-                break;
-        }
-        
-        $content_array .= ob_get_contents();
-        
-        ob_end_clean();
+        $boutons = '<ul class="sedoo_port_action_btn ctx_button">';
+            while($loop->have_posts()) : $loop->the_post();
+                if (!in_array(get_post_type(), $cpt_array)) { 
+                    $cpt_array[]  = get_post_type();    
+                    $cpt_name = get_post_type_object( get_post_type() )->labels->name;
+                    $boutons .= '<li cpt="'.get_post_type().'" order="'.$ordre.'" orderby="'.$tri.'" ctx="'.$ctx.'" term="'.$terme.'" layout="'.$layout.'"><p>'.$cpt_name.'</p></li>';
+                }
+                ob_start();
+                sedoo_portfolio_display_items($layout);
 
-    endwhile;
-    echo $boutons.'</ul>';
-    echo '<section class="sedoo_portfolio_section section_ctx">';
-    echo $content_array;
-    echo '</section>';
-     }
+                $content_array .= ob_get_contents();
+                
+                ob_end_clean();
+            endwhile;
+        echo $boutons.'</ul>';
+        echo '<section class="sedoo_portfolio_section section_ctx">';
+        echo $content_array;
+        echo '</section>';
+    }
 }

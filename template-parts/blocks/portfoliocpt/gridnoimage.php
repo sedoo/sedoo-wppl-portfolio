@@ -8,7 +8,7 @@
                 $categories = get_the_category();
                 if ( ! empty( $categories ) ) {
                 ?>             
-                <header class="entry-header">
+                <header class="entry-header sedoo_port_header_noimage">
 
                 <p>
                     <?php 
