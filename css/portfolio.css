@@ -1,5 +1,6 @@
 .sedoo_portfolio_section {
     display: flex;
+    flex-wrap: wrap;
 }
 
 .sedoo_portfolio_section .sedoo_portfolio_item{
@@ -10,31 +11,61 @@
 
 .sedoo_port_action_btn {
     display: flex;
+    padding: 0 !important;
     justify-content: center;
 }
 .sedoo_port_action_btn li {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
     list-style-type: none;
     border: 1px solid #e6e6e6;
     margin: 0 10px !important;
     cursor: pointer;
     padding: 5px 15px;
     border-radius: 5px;
-    -webkit-transition: background .2s ease-in;
-    -moz-transition: background .2s ease-in;
-    -ms-transition: background .2s ease-in;
-    -o-transition: background .2s ease-in;
-    transition: background .2s ease-in;
+    text-align: center;
+    -webkit-transition: all .2s ease-in;
+    -moz-transition: all .2s ease-in;
+    -ms-transition: all .2s ease-in;
+    -o-transition: all .2s ease-in;
+    transition: all .2s ease-in;
+}
+
+.sedoo_port_header_noimage {
+    height: 40px !important;
+}
+
+.sedoo_port_header_noimage p {
+    margin-top: 0;
+}
+
+.sedoo_port_list {
+    margin-top: 15px;
+    display: block;
+    position: initial;
+}
+.sedoo_port_list a {
+    position: initial;
+}
+
+.sedoo_port_action_btn li p {
+    margin: 0;
+    text-align: center;
 }
 
 .sedoo_port_action_btn li:hover {
     background-color: #e6e6e6;
-    -webkit-transition: background .2s ease-in;
-    -moz-transition: background .2s ease-in;
-    -ms-transition: background .2s ease-in;
-    -o-transition: background .2s ease-in;
-    transition: background .2s ease-in;
+    color:white;
+    -webkit-transition: all .2s ease-in;
+    -moz-transition: all .2s ease-in;
+    -ms-transition: all .2s ease-in;
+    -o-transition: all .2s ease-in;
+    transition: all .2s ease-in;
 }
 
 .sedoo_port_action_btn li.active {
     background-color: #e6e6e6;
+    color:white;
 }

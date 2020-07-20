@@ -101,13 +101,62 @@ function sedoo_portfolio_populate_taxo_depend_on_post_type() {
 add_action('wp_ajax_sedoo_portfolio_populate_taxo_depend_on_post_type', 'sedoo_portfolio_populate_taxo_depend_on_post_type');
 
 
+//////////////////
+/// Function to display items depend on $layout, but only for ajax call
+/////////////////
+function sedoo_portfolio_display_items_ajax($layout) {
+	switch ($layout) {
+		case 'grid':
+			include('template-parts/blocks/portfoliocpt/grid.php');
+			break;
+		case 'grid-no-image':
+			include('template-parts/blocks/portfoliocpt/gridnoimage.php');
+			break;
+		case 'list':
+			include('template-parts/blocks/portfoliocpt/list.php');
+			break;
+		default:
+			break;
+	}	
+}
+
+
+//////////////////
+/// Function to da ajax query depending on which type of call (cpt or ctx filters)
+/////////////////
+function sedoo_portfolio_do_ajax_query($cpt, $order, $orderby, $taxo, $term_data, $term_field) {
+	$items = new WP_Query(array(
+		'post_type' => $cpt,
+		'order' => $order,
+		'orderby' => $orderby,
+		'numberposts' => -1,
+		'post_status' => 'publish',
+		'tax_query' => array(
+		  array(
+			'taxonomy' => $taxo,
+			'field' => $term_field, 
+			'terms' => $term_data, /// Where term_id of Term 1 is "1".
+			'include_children' => false
+		  )
+		)
+	));
+	return $items;
+}
+
+
+
+
 /*************
 * FILTERS FOR FRONT END
 */
 
-
-/***  * FRONT END FILTER (DISPLAY BY CPT)  / AJAX CALL FROM FRONT.JS LINE 12 ***/
-function sedoo_portfolio_filter_display_cpt() {
+/***  * FRONT END FILTER */
+function sedoo_portfolio_filter_display() {
+	if($_POST['sedoo_portfolio_filter'] == 'cpt') {
+		$term_field = 'slug';
+	} else {
+		$term_field = 'id';
+	}
 	$cpt = $_POST['cpt'];
 	$term = $_POST['term'];
 	$taxo = $_POST['taxo'];
@@ -115,87 +164,15 @@ function sedoo_portfolio_filter_display_cpt() {
 	$order = $_POST['order'];
 	$orderby = $_POST['orderby'];
 
-	$items = new WP_Query(array(
-		'post_type' => $cpt,
-		'order' => $order,
-		'orderby' => $orderby,
-		'numberposts' => -1,
-		'post_status' => 'publish',
-		'tax_query' => array(
-		  array(
-			'taxonomy' => $taxo,
-			'field' => 'slug', 
-			'terms' => $term, /// Where term_id of Term 1 is "1".
-			'include_children' => false
-		  )
-		)
-	  ));
+	$items = sedoo_portfolio_do_ajax_query($cpt, $order, $orderby, $taxo, $term, $term_field);
+
 	    if ( $items->have_posts() ) {
 			while ( $items->have_posts() ) {
 				$items->the_post();   	
-				switch ($layout) {
-					case 'grid':
-						include('template-parts/blocks/portfoliocpt/grid.php');
-						break;
-					case 'grid-no-image':
-						include('template-parts/blocks/portfoliocpt/gridnoimage.php');
-						break;
-					case 'list':
-						include('template-parts/blocks/portfoliocpt/list.php');
-						break;
-					default:
-						break;
-				}		
+				sedoo_portfolio_display_items_ajax($layout);
 			}
 		}			
 	  wp_die();
 }
-add_action('wp_ajax_sedoo_portfolio_filter_display_cpt', 'sedoo_portfolio_filter_display_cpt');
-add_action('wp_ajax_nopriv_sedoo_portfolio_filter_display_cpt', 'sedoo_portfolio_filter_display_cpt');
-
-/***  * FRONT END FILTER (DISPLAY BY CTX)  / AJAX CALL FROM FRONT.JS LINE 40 ***/
-function sedoo_portfolio_filter_display_ctx() {
-	$cpt = $_POST['cpt'];
-	$term = $_POST['term'];
-	$taxo = $_POST['taxo'];
-	$layout = $_POST['layout'];
-	$order = $_POST['order'];
-	$orderby = $_POST['orderby'];
-
-	$items = new WP_Query(array(
-		'post_type' => $cpt,
-		'order' => $order,
-		'orderby' => $orderby,
-		'numberposts' => -1,
-		'post_status' => 'publish',
-		'tax_query' => array(
-		  array(
-			'taxonomy' => $taxo,
-			'field' => 'id', 
-			'terms' => $term, /// Where term_id of Term 1 is "1".
-			'include_children' => false
-		  )
-		)
-	  ));
-	    if ( $items->have_posts() ) {
-			while ( $items->have_posts() ) {
-				$items->the_post();    
-				switch ($layout) {
-					case 'grid':
-						include('template-parts/blocks/portfoliocpt/grid.php');
-						break;
-					case 'grid-no-image':
-						include('template-parts/blocks/portfoliocpt/gridnoimage.php');
-						break;
-					case 'list':
-						include('template-parts/blocks/portfoliocpt/list.php');
-						break;
-					default:
-						break;
-				}	
-			}
-		}			
-	  wp_die();
-}
-add_action('wp_ajax_sedoo_portfolio_filter_display_ctx', 'sedoo_portfolio_filter_display_ctx');
-add_action('wp_ajax_nopriv_sedoo_portfolio_filter_display_ctx', 'sedoo_portfolio_filter_display_ctx');
+add_action('wp_ajax_sedoo_portfolio_filter_display', 'sedoo_portfolio_filter_display');
+add_action('wp_ajax_nopriv_sedoo_portfolio_filter_display', 'sedoo_portfolio_filter_display');

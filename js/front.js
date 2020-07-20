@@ -1,4 +1,3 @@
-
 jQuery(document).ready(function(){   
     //////
     // FILTER BY TERM (FOR DISPLAY CPT)
@@ -16,7 +15,7 @@ jQuery(document).ready(function(){
             url: ajaxurl,
             method: "POST",
             dataType:"json",
-            data: { action : 'sedoo_portfolio_filter_display_cpt','order': order, 'orderby': orderby, 'layout':layout, 'taxo': taxo, 'cpt': cpt, 'term': term },
+            data: { action : 'sedoo_portfolio_filter_display','order': order, 'orderby': orderby, 'layout':layout, 'taxo': taxo, 'cpt': cpt, 'term': term , 'sedoo_portfolio_filter': 'cpt'},
             complete:function(result_term_list) {
                 if(result_term_list.responseText != '') {
                     jQuery('.sedoo_portfolio_section.section_cpt').html(result_term_list.responseText);
@@ -43,7 +42,7 @@ jQuery(document).ready(function(){
             url: ajaxurl,
             method: "POST",
             dataType:"json",
-            data: { action : 'sedoo_portfolio_filter_display_ctx','order': order, 'orderby': orderby, 'layout':layout, 'taxo': taxo, 'cpt': cpt, 'term': term },
+            data: { action : 'sedoo_portfolio_filter_display','order': order, 'orderby': orderby, 'layout':layout, 'taxo': taxo, 'cpt': cpt, 'term': term, 'sedoo_portfolio_filter': 'ctx' },
             complete:function(result_term_list) {
                 if(result_term_list.responseText != '') {
                     jQuery('.sedoo_portfolio_section.section_ctx').html(result_term_list.responseText);
