@@ -185,6 +185,8 @@ add_action('wp_ajax_nopriv_sedoo_portfolio_filter_display', 'sedoo_portfolio_fil
 function archive_do_portfolio_display($term){
 
 	$args = array(
+      "numberposts" => -1,
+      "posts_per_page" => -1,
 	  'tax_query' => array(
 		array(
 		  'taxonomy' => $term->taxonomy,
