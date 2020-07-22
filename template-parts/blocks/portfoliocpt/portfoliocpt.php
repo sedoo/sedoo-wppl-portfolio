@@ -83,6 +83,8 @@ else {
     $ctx = get_field('field_5f05b3fd83516');
     $terme = get_field('choix_du_terme');
     $args = array(
+        "numberposts" => 50,
+        "posts_per_page" => 15,
         'tax_query' => array(
             array(
                 'taxonomy' => $ctx,
