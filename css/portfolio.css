@@ -9,6 +9,10 @@
     padding: 15px;
 }
 
+.sedoo_portfolio_section .sedoo_portfolio_item article {
+    height: 100%;
+}
+
 .sedoo_port_action_btn {
     display: flex;
     padding: 0 !important;
