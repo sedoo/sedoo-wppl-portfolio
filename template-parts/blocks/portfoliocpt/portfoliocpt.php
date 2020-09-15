@@ -9,7 +9,19 @@ $tri = get_field('tri');
 $ordre = get_field('ordre');
 
 $code_color = get_theme_mod( 'labs_by_sedoo_color_code' );
+
+// Create class attribute allowing for custom "className" and "align" values.
+$className = 'sedoo_blocks_portfolio';
+if( !empty($block['className']) ) {
+    $className .= ' ' . $block['className'];
+}
+if( !empty($block['align']) ) {
+    $className .= ' align' . $block['align'];
+}
+
 ?>
+
+<section class="'<?php echo $className; ?>'">
 <style>
     .sedoo_port_action_btn li:hover {
         background-color: <?php echo $code_color; ?> !important;
@@ -120,3 +132,6 @@ else {
         echo '</section>';
     }
 }
+?>
+</section>
+<?php 

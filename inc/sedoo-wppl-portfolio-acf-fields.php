@@ -267,7 +267,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'label' => 'Affichage en portfolio',
                 'name' => 'sedoo_affichage_en_portfolio',
                 'type' => 'true_false',
-                'instructions' => 'Si sélectionné, supplantera les autre choix d\'affichage.',
+                'instructions' => 'Si sélectionné, surchargera les autres choix d\'affichage.',
                 'required' => 0,
                 'conditional_logic' => 0,
                 'wrapper' => array(

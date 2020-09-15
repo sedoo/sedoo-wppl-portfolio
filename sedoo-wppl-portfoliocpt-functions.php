@@ -183,7 +183,7 @@ add_action('wp_ajax_nopriv_sedoo_portfolio_filter_display', 'sedoo_portfolio_fil
 * DISPLAY PORTFOLIO FOR TERMS WHERE PORTFOLIO DISPLAY IS CHECKED
 */
 function archive_do_portfolio_display($term){
-	
+	var_dump('aa');
 	$args = array(
       "numberposts" => -1,
 	  "posts_per_page" => -1,
