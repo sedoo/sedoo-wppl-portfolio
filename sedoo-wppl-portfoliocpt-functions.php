@@ -186,7 +186,7 @@ function archive_do_portfolio_display($term){
 	$args = array(
       "numberposts" => -1,
 	  "posts_per_page" => -1,
-	  'post_type' => 'post',
+	  'post_type' => 'any',
 	  'tax_query' => array(
 		array(
 		  'taxonomy' => $term->taxonomy,
@@ -197,19 +197,13 @@ function archive_do_portfolio_display($term){
 	  'orderby' => 'date', 
 	  'order' => 'DESC',
 	);
-  var_dump('term->taxo'.$term->taxonomy);
-  var_dump('term->termid'.$term->term_id);
 	$cpt_array = [];
 	$content_array;
 	$boutons = '<ul class="sedoo_port_action_btn ctx_button">';
 	$loop = new WP_Query($args);
 	$count = $loop->found_posts;
-	var_dump('count:'.$count);
 	if($loop->have_posts()) {
-		var_dump('have post');
 	  while($loop->have_posts()) : $loop->the_post();
-	  var_dump('getposttype'.get_post_type());
-	  var_dump('cptarray'.$cpt_array);
 		if (!in_array(get_post_type(), $cpt_array)) { 
 		  $cpt_array[]  = get_post_type();    
 		  $cpt_name = get_post_type_object( get_post_type() )->labels->name;
