@@ -3,7 +3,7 @@
 // FILL SELECT TERM FIELD BY SELECT TAXONOMY VALUE (fill field field_5f05b47483517)
 //////
 jQuery(document).ready(function(){    
-    jQuery(document).on('change', '[data-key="field_5f05b3fd83516"] .acf-input select', function(e) { 
+    jQuery(document).on('click', '[data-key="field_5f05b3fd83516"] .acf-input select', function(e) { 
         jQuery('.acf-field-5f05b47483517 select').empty(); // empty cpt select
 
         taxo_for_terme = jQuery(this).val(); 
@@ -31,7 +31,7 @@ jQuery(document).ready(function(){
 // FILL TAXO FIELD BY POST TYPE VALUE (fill field field_5f05b5841a7fa)
 //////
 jQuery(document).ready(function(){    
-    jQuery(document).on('change', '[data-key="field_5f05b51fd0006"] .acf-input select', function(e) { 
+    jQuery(document).on('click', '[data-key="field_5f05b51fd0006"] .acf-input select', function(e) { 
         jQuery('.acf-field-5f05b5841a7fa select').empty(); // empty cpt select
 
         post_type_for_taxo = jQuery(this).val(); 

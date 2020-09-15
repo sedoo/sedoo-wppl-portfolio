@@ -9,12 +9,12 @@ function register_sedoo_portfoliocpt_block_types() {
     // register related block content.
     acf_register_block_type(array(
         'name'              => 'sedoo_labtools_portfoliocpt',
-        'title'             => __('Sedoo Portfolio cpt'),
-        'description'       => __('Ajout du portfolio de contenu organisé en cpt'),
+        'title'             => __('Sedoo Portfolio'),
+        'description'       => __('Ajouter un portfolio de contenu personnalisable.'),
         'render_callback'	=> 'sedoo_blocks_portfoliocpt_render_callback',
         'category'          => 'sedoo-block-category',
-        'icon'              => 'category',
-        'keywords'          => array( 'sedoo', 'cpt', 'Portfolio', 'posts' ),
+        'icon'              => 'schedule',
+        'keywords'          => array( 'sedoo', 'Portfolio', 'posts' ),
     ));
 }
 // Check if function exists and hook into setup.
