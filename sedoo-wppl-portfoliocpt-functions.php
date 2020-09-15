@@ -186,7 +186,7 @@ function archive_do_portfolio_display($term){
 	$args = array(
       "numberposts" => -1,
 	  "posts_per_page" => -1,
-	  'post_type' => 'any',
+	  'post_type' => 'post',
 	  'tax_query' => array(
 		array(
 		  'taxonomy' => $term->taxonomy,
