@@ -3,7 +3,7 @@
 /**
  * Plugin Name: Sedoo - Portfolio
  * Description: Affiche un bloc portfolio
- * Version: 0.4.5
+ * Version: 0.4.7
  * Author: Nicolas Gruwe  - SEDOO DATA CENTER
  * Author URI:      https://www.sedoo.fr 
  * GitHub Plugin URI: sedoo/sedoo-wppl-portfolio
