@@ -183,6 +183,18 @@ add_action('wp_ajax_nopriv_sedoo_portfolio_filter_display', 'sedoo_portfolio_fil
 * DISPLAY PORTFOLIO FOR TERMS WHERE PORTFOLIO DISPLAY IS CHECKED
 */
 function archive_do_portfolio_display($term){
+	$code_color = get_theme_mod( 'labs_by_sedoo_color_code' );
+	?>
+	<style>
+		.sedoo_port_action_btn li:hover {
+			background-color: <?php echo $code_color; ?> !important;
+		}
+
+		.sedoo_port_action_btn li.active {
+			background-color: <?php echo $code_color; ?> !important;
+		}
+	</style>
+	<?php 
 	$args = array(
       "numberposts" => -1,
 	  "posts_per_page" => -1,
