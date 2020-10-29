@@ -136,7 +136,7 @@ function sedoo_portfolio_do_ajax_query($cpt, $order, $orderby, $taxo, $term_data
 			'taxonomy' => $taxo,
 			'field' => $term_field, 
 			'terms' => $term_data, /// Where term_id of Term 1 is "1".
-			'include_children' => false
+			'include_children' => true
 		  )
 		)
 	));
