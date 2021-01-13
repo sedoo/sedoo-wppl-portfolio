@@ -200,7 +200,7 @@ function archive_do_portfolio_display($term){
 	<div id="portfolio_ajax_infos" order="date" orderby="DESC" layout="grid" ctx="<?php echo $term->taxonomy; ?>" term="<?php echo $term->term_id; ?>"></div>
 	<?php 
 	$args = array(
-	  "posts_per_page" => 5,
+	  "posts_per_page" => get_option( 'posts_per_page' ),
 	  'post_type' => 'any',
 	  'tax_query' => array(
 		array(
