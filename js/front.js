@@ -67,33 +67,26 @@ jQuery(document).ready(function(){
     ///////
     // AJAX PAGINATION
     ///////
-    var loading_another_page = 0;
-    jQuery(window).scroll(function(){
-        if(  (jQuery('.sedoo_portfolio_section').offset().top + jQuery('.sedoo_portfolio_section').outerHeight() - window.innerHeight)-20 < jQuery(window).scrollTop() &&  (jQuery('.sedoo_portfolio_section').offset().top + jQuery('.sedoo_portfolio_section').outerHeight() - window.innerHeight)+20 > jQuery(window).scrollTop() ) {
-            if (ajax_refresh_page > ajax_refresh_max_page){
-                return false;
-            } else {  
-                ajax_refresh_page++;                
-                loadArticle(ajax_refresh_page, ajax_refresh_cpt, ajax_refresh_term, ajax_refresh_taxo,ajax_refresh_layout);
-            }
-        }
+    jQuery('.sedoo_portfolio_section').append('<div id="button_for_page_load"> Click to show more </div>');
+    jQuery('#button_for_page_load').click(function(){
+        ajax_refresh_page++;                
+        loadArticle(ajax_refresh_page, ajax_refresh_cpt, ajax_refresh_term, ajax_refresh_taxo,ajax_refresh_layout);
     });
 
 
     function loadArticle(pageNumber, ajaxcpt, ajaxterm, ajaxtaxo, ajaxlayout){ 
-        if(jQuery('.sedoo_infiniteloader').length > 0) {} else {    
-            jQuery('.sedoo_portfolio_section').append('<div class="sedoo_infiniteloader" style="display:block; width:100%;"  id="infiniteloader"> LOADING... PLEASE WAIT </div>');
-        }
+        jQuery('.button_for_page_load').text('Loading..');
         jQuery.ajax({
           url: ajaxurl,
           type:'POST',
           data: { action : 'sedoo_portfolio_filter_display','maxpage': ajax_refresh_max_page, 'page': pageNumber,'order': ajax_refresh_order, 'orderby': ajax_refresh_orderby, 'layout':ajaxlayout, 'taxo': ajaxtaxo, 'cpt': ajaxcpt, 'term': ajaxterm, 'sedoo_portfolio_filter': 'ctx' },
           complete:function(result_term_list) {
             if(result_term_list.responseText != '') {
+                  jQuery('#button_for_page_load').remove();
                   jQuery('.sedoo_portfolio_section').append(result_term_list.responseText);
               } else {
               }
-              jQuery('#infiniteloader').remove();
+              jQuery('.sedoo_portfolio_section').append('<div id="button_for_page_load"> Click to show more </div>');
           }
         });
     return false;
