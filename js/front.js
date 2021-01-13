@@ -91,10 +91,11 @@ jQuery(document).ready(function(){
             if(result_term_list.responseText != '') {
                 jQuery('#button_for_page_load').remove();
                 jQuery('.sedoo_portfolio_section').append(result_term_list.responseText);
-                jQuery('#button_for_page_load').text('Click to show more');     
+                jQuery('#button_for_page_load').text('Click to show more'); 
+                addAndLoadReloadPageButton();    
             } else {
+                jQuery('#button_for_page_load').remove();
             }
-            addAndLoadReloadPageButton();
           }
         });
     return false;
