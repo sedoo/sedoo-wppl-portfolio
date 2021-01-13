@@ -82,7 +82,7 @@ jQuery(document).ready(function(){
 
     function loadArticle(pageNumber, ajaxcpt, ajaxterm, ajaxtaxo, ajaxlayout){ 
         if(jQuery('.sedoo_infiniteloader').length > 0) {} else {    
-            jQuery('.sedoo_portfolio_section').append('<div class="sedoo_infiniteloader" id="infiniteloader"> LOADING... PLEASE WAIT </div>');
+            jQuery('.sedoo_portfolio_section').append('<div class="sedoo_infiniteloader" style="display:block; width:100%;"  id="infiniteloader"> LOADING... PLEASE WAIT </div>');
         }
         jQuery.ajax({
           url: ajaxurl,
