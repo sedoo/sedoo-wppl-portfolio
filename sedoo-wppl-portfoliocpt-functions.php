@@ -131,7 +131,7 @@ function sedoo_portfolio_do_ajax_query($page, $cpt, $order, $orderby, $taxo, $te
 		'order' => $order,
 		'paged' => $page,
 		'orderby' => $orderby,
-		'post_per_page' => 5,
+		'post_per_page' => get_option( 'posts_per_page' ),
 		'post_status' => 'publish',
 		'tax_query' => array(
 		  array(
