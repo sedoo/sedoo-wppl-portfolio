@@ -71,7 +71,7 @@ if($typedefiltre == 'cpt') {
     //
     echo '<ul class="sedoo_port_action_btn cpt_button">';
         foreach($terms as $term) {
-            echo '<li cpt="'.$cpt.'" order="'.$ordre.'" orderby="'.$tri.'" taxo="'.$taxo.'" term="'.$term->slug.'" layout="'.$layout.'"><p>'.$term->name.'</p></li>';
+            echo '<li cpt="'.$cpt.'" maxpage="'.$loop->max_num_pages.'" order="'.$ordre.'" orderby="'.$tri.'" taxo="'.$taxo.'" term="'.$term->slug.'" layout="'.$layout.'"><p>'.$term->name.'</p></li>';
         }
     echo '</ul>';
 
@@ -95,8 +95,7 @@ else {
     $ctx = get_field('field_5f05b3fd83516');
     $terme = get_field('choix_du_terme');
     $args = array(
-        "numberposts" => 50,
-        "posts_per_page" => 15,
+        "posts_per_page" => -1,
         'tax_query' => array(
             array(
                 'taxonomy' => $ctx,
@@ -117,7 +116,7 @@ else {
                 if (!in_array(get_post_type(), $cpt_array)) { 
                     $cpt_array[]  = get_post_type();    
                     $cpt_name = get_post_type_object( get_post_type() )->labels->name;
-                    $boutons .= '<li cpt="'.get_post_type().'" order="'.$ordre.'" orderby="'.$tri.'" ctx="'.$ctx.'" term="'.$terme.'" layout="'.$layout.'"><p>'.$cpt_name.'</p></li>';
+                    $boutons .= '<li cpt="'.get_post_type().'" maxpage="'.$loop->max_num_pages.'" order="'.$ordre.'" orderby="'.$tri.'" ctx="'.$ctx.'" term="'.$terme.'" layout="'.$layout.'"><p>'.$cpt_name.'</p></li>';
                 }
                 ob_start();
                 sedoo_portfolio_display_items($layout);

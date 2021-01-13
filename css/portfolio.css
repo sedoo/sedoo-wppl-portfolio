@@ -73,3 +73,11 @@
     background-color: #e6e6e6;
     color:white;
 }
+
+.sedoo_infiniteloader {    
+    width: 100%;
+    display: block;
+    background: #ccc;
+    text-align: center;
+    padding: 2em;
+}
