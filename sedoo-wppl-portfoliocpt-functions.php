@@ -196,6 +196,14 @@ function archive_do_portfolio_display($term){
 		.sedoo_port_action_btn li.active {
 			background-color: <?php echo $code_color; ?> !important;
 		}
+		#button_for_page_load {    
+			background: #d7d7d7;
+			width: 100%;
+			padding: 2em;
+			text-align: center;
+			display: block;
+			cursor: pointer;
+		}
 	</style>
 	<div id="portfolio_ajax_infos" order="date" orderby="DESC" layout="grid" ctx="<?php echo $term->taxonomy; ?>" term="<?php echo $term->term_id; ?>"></div>
 	<?php 
