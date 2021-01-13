@@ -74,10 +74,11 @@
     color:white;
 }
 
-.sedoo_infiniteloader {    
+#button_for_page_load {    
+    background: #d7d7d7;
     width: 100%;
-    display: block;
-    background: #ccc;
-    text-align: center;
     padding: 2em;
+    text-align: center;
+    display: block;
+    cursor: pointer;
 }
