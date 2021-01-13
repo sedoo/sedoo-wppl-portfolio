@@ -124,12 +124,14 @@ function sedoo_portfolio_display_items_ajax($layout) {
 //////////////////
 /// Function to da ajax query depending on which type of call (cpt or ctx filters)
 /////////////////
-function sedoo_portfolio_do_ajax_query($cpt, $order, $orderby, $taxo, $term_data, $term_field) {
+function sedoo_portfolio_do_ajax_query($page, $cpt, $order, $orderby, $taxo, $term_data, $term_field) {
+	
 	$items = new WP_Query(array(
 		'post_type' => $cpt,
 		'order' => $order,
+		'paged' => $page,
 		'orderby' => $orderby,
-		'numberposts' => -1,
+		'post_per_page' => 5,
 		'post_status' => 'publish',
 		'tax_query' => array(
 		  array(
@@ -157,6 +159,7 @@ function sedoo_portfolio_filter_display() {
 	} else {
 		$term_field = 'id';
 	}
+	$page = $_POST['page'];
 	$cpt = $_POST['cpt'];
 	$term = $_POST['term'];
 	$taxo = $_POST['taxo'];
@@ -164,7 +167,7 @@ function sedoo_portfolio_filter_display() {
 	$order = $_POST['order'];
 	$orderby = $_POST['orderby'];
 
-	$items = sedoo_portfolio_do_ajax_query($cpt, $order, $orderby, $taxo, $term, $term_field);
+	$items = sedoo_portfolio_do_ajax_query($page,$cpt, $order, $orderby, $taxo, $term, $term_field);
 
 	    if ( $items->have_posts() ) {
 			while ( $items->have_posts() ) {
@@ -194,10 +197,10 @@ function archive_do_portfolio_display($term){
 			background-color: <?php echo $code_color; ?> !important;
 		}
 	</style>
+	<div id="portfolio_ajax_infos" order="date" orderby="DESC" layout="grid" ctx="<?php echo $term->taxonomy; ?>" term="<?php echo $term->term_id; ?>"></div>
 	<?php 
 	$args = array(
-      "numberposts" => -1,
-	  "posts_per_page" => -1,
+	  "posts_per_page" => 5,
 	  'post_type' => 'any',
 	  'tax_query' => array(
 		array(

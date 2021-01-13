@@ -3,7 +3,7 @@
 /**
  * Plugin Name: Sedoo - Portfolio
  * Description: Affiche un bloc portfolio
- * Version: 0.5.3
+ * Version: 0.6
  * Author: Nicolas Gruwe  - SEDOO DATA CENTER
  * Author URI:      https://www.sedoo.fr 
  * GitHub Plugin URI: sedoo/sedoo-wppl-portfolio
@@ -50,5 +50,7 @@ if ( ! function_exists('get_field') ) {
   include 'sedoo-wppl-portfoliocpt-functions.php';
   include 'sedoo-wppl-portfoliocpt-acf.php';
   include 'inc/sedoo-wppl-portfolio-acf-fields.php';
+
+
 
 }
