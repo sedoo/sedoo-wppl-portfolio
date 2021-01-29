@@ -17,16 +17,16 @@
                     </header><!-- .entry-header -->
                 </p>
                 <?php
-                }; 
+                }
                 ?>
             <div class="group-content">
                 <div class="entry-content">
                     <h3><?php the_title(); ?></h3>
                     <?php
-                    if ( 'post' === get_post_type() ) :
+                    if ( has_excerpt( $post->ID ) ) {
                     ?>
                     <?php the_excerpt(); ?>
-                    <?php endif; ?>
+                    <?php } ?>
                 </div><!-- .entry-content -->
                 <?php
                 if ( 'post' === get_post_type() ) :
