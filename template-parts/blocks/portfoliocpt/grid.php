@@ -25,26 +25,26 @@
                     ?>
                 </p>
                 <?php
-                }; 
+                }
                 ?>
             </header><!-- .entry-header -->
             <div class="group-content">
                 <div class="entry-content">
                     <h3><?php the_title(); ?></h3>
                     <?php
-                    if ( 'post' === get_post_type() ) :
+                    if ( has_excerpt( $post->ID ) ) {
                     ?>
                     <?php the_excerpt(); ?>
-                    <?php endif; ?>
+                    <?php } ?>
                 </div><!-- .entry-content -->
                 <?php
-                if ( 'post' === get_post_type() ) :
+                if ( 'post' === get_post_type() ) {
                 ?>
                 <footer class="entry-footer">
                     <p><?php the_date('d.m.Y') ?></p>
                     <a href="<?php the_permalink(); ?>"><?php echo __('Read more', 'sedoo-wpth-labs'); ?> →</a>
                 </footer><!-- .entry-footer -->
-                <?php endif; ?>
+                <?php } ?>
                 </footer><!-- .entry-footer -->
             </div>
     </article><!-- #post-->
