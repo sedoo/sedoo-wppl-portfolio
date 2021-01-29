@@ -254,7 +254,8 @@ function archive_do_portfolio_display($term){
 		
 		$checkIfPosttypeHasPostFromTerm = new WP_Query( $argspotentialcpt );
 		if($checkIfPosttypeHasPostFromTerm->have_posts()) {
-			$boutons .= '<li cpt="'.$potentialcpt.'" order="date" orderby="DESC" ctx="'.$term->taxonomy.'" term="'.$term->term_id.'" layout="grid">'.$potentialcpt.' ('.$checkIfPosttypeHasPostFromTerm->found_posts.')</li>';
+			$displayedCpt = get_post_type_object( $potentialcpt );
+			$boutons .= '<li cpt="'.$potentialcpt.'" order="date" orderby="DESC" ctx="'.$term->taxonomy.'" term="'.$term->term_id.'" layout="grid">'.$displayedCpt->label.' ('.$checkIfPosttypeHasPostFromTerm->found_posts.')</li>';
 		}
 	}
 	// END LIST OF BUTTONS
