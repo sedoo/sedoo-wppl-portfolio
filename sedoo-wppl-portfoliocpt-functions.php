@@ -225,18 +225,49 @@ function archive_do_portfolio_display($term){
 	$boutons = '<ul class="sedoo_port_action_btn ctx_button">';
 	$loop = new WP_Query($args);
 	$count = $loop->found_posts;
+	
+
+
+
+	// GET A LIST OF BUTTONS
+	$arg_get_cpt_list = $args = array(
+		'public'   => true,
+		'_builtin' => false
+	);
+
+	$cptlist = array_values(get_post_types($arg_get_cpt_list));
+	array_push($cptlist, 'post', 'page');
+
+	foreach($cptlist as $potentialcpt) {
+		$argspotentialcpt = array(
+			'posts_per_page' => -1,
+			'post_type' => $potentialcpt,
+			'post_status' => 'publish',
+			'tax_query' => array(
+				array(
+					'taxonomy' => $term->taxonomy,
+					'field' => 'term_id',
+					'terms' => $term->term_id,
+				),
+			),
+		);
+		
+		$checkIfPosttypeHasPostFromTerm = new WP_Query( $argspotentialcpt );
+		if($checkIfPosttypeHasPostFromTerm->have_posts()) {
+			$boutons .= '<li cpt="'.$potentialcpt.'" order="date" orderby="DESC" ctx="'.$term->taxonomy.'" term="'.$term->term_id.'" layout="grid">'.$potentialcpt.' ('.$checkIfPosttypeHasPostFromTerm->found_posts.')</li>';
+		}
+	}
+	// END LIST OF BUTTONS
+
+
+
+
 	if($loop->have_posts()) {
 	  while($loop->have_posts()) : $loop->the_post();
-		if (!in_array(get_post_type(), $cpt_array)) { 
-		  $cpt_array[]  = get_post_type();    
-		  $cpt_name = get_post_type_object( get_post_type() )->labels->name;
-		  $boutons .= '<li cpt="'.get_post_type().'" order="date" orderby="DESC" ctx="'.$term->taxonomy.'" term="'.$term->term_id.'" layout="grid">'.$cpt_name.'</li>';
-		}
+	
 		ob_start();
 		include(get_template_directory().'/template-parts/content-portfolio-grid.php');
-  
 		$content_array .= ob_get_contents();
-		
 		ob_end_clean();
   
 	  endwhile;
